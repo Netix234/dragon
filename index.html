@@ -3,105 +3,112 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NOIR — міська кав'ярня та простір для натхнення.">
-  <title>NOIR — Coffee Atelier</title>
+  <meta name="description" content="NOIR — кав'ярня для неспішних зустрічей, розмов і доброї кави.">
+  <meta name="theme-color" content="#f4f0e8">
+  <title>NOIR — Coffee House</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <a class="logo" href="#home" aria-label="NOIR — на головну">NOIR<span>.</span></a>
-    <nav class="main-nav" aria-label="Головна навігація">
+  <header class="site-header" id="home">
+    <a class="logo" href="#home">NOIR<span>.</span></a>
+    <button class="menu-toggle" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="main-nav"><span></span><span></span></button>
+    <nav class="main-nav" id="main-nav" aria-label="Головна навігація">
       <a href="#story">Наша історія</a>
-      <a href="#menu">Меню</a>
-      <a href="#visit">Завітати</a>
+      <a href="#menu">Кава</a>
+      <a href="#visit">Контакти</a>
     </nav>
-    <a class="header-cta" href="#visit">Знайти нас <span>↗</span></a>
-    <button class="menu-toggle" aria-label="Відкрити меню" aria-expanded="false">☰</button>
+    <a class="header-cta" href="#visit">Завітати до нас <span>↗</span></a>
   </header>
 
   <main>
-    <!-- ЕКРАН 1: головний екран -->
-    <section class="hero screen" id="home">
-      <div class="hero-copy">
-        <p class="eyebrow hero-eyebrow"><span class="eyebrow-line"></span> COFFEE ATELIER · KYIV</p>
-        <h1>Твій момент.<br><em>Твій ритм.</em></h1>
-        <p class="hero-description">Місце, де аромат свіжої кави зустрічається з мистецтвом повільного життя.</p>
-        <div class="hero-actions">
-          <a class="button button-dark" href="#menu">Відкрити меню <span>↗</span></a>
-          <a class="text-link" href="#story">Відчути NOIR <span>↓</span></a>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=2200&q=90" alt="Світлий інтер'єр затишної кав'ярні">
+        <div class="hero-overlay"></div>
+        <div class="hero-copy">
+          <p class="eyebrow">COFFEE · CONVERSATION · COMMUNITY</p>
+          <h1 id="hero-title">Залишайся<br><em>на ще одну чашку.</em></h1>
+          <a class="hero-link" href="#story">ВІДКРИЙ NOIR <span>↓</span></a>
         </div>
-        <div class="hero-note"><span class="note-dot"></span> ВІДКРИТО ЩОДНЯ · 08:00—21:00</div>
+        <span class="hero-caption">KYIV, UKRAINE · EST. 2021</span>
       </div>
-      <div class="hero-visual">
-        <div class="hero-image"></div>
-        <div class="image-label"><span>01 / 03</span><span>THE ART OF COFFEE</span></div>
-        <div class="round-stamp">SLOW<br>DOWN<br>♡</div>
+      <div class="hero-intro">
+        <span class="intro-line"></span>
+        <p>Добра кава — це лише початок. У NOIR є місце для розмов, нових ідей та моментів, які хочеться трохи продовжити.</p>
+        <span class="intro-line"></span>
       </div>
-      <a class="scroll-cue" href="#story">SCROLL TO EXPLORE <span>↓</span></a>
     </section>
 
-    <!-- ЕКРАН 2: історія та переваги -->
-    <section class="story screen" id="story">
-      <div class="section-topline"><span>02 — НАША ФІЛОСОФІЯ</span><span>МЕНШЕ ПОСПІХУ. БІЛЬШЕ СМАКУ.</span></div>
-      <div class="story-grid">
-        <div class="story-image-wrap">
-          <img class="story-image" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1000&q=85" alt="Бариста готує каву за професійною кавомашиною">
-          <div class="image-caption">CRAFTED WITH CARE — SINCE 2021</div>
+    <section class="story section" id="story">
+      <div class="story-image reveal-left">
+        <img src="interior.jpg" alt="Деталі інтер'єру кав'ярні" loading="lazy">
+      </div>
+      <div class="story-copy reveal-up">
+        <p class="eyebrow">НАША ІСТОРІЯ</p>
+        <h2>Трохи повільніше.<br><em>Трохи ближче.</em></h2>
+        <p>Ми створили NOIR за натхненням європейських кав'ярень — місць, де люди зустрічаються, читають, працюють над ідеями та просто проводять час разом. Тут не потрібно поспішати. Обирай улюблений столик, замовляй каву й залишайся стільки, скільки хочеться.</p>
+        <a class="text-link" href="#visit">ЗНАЙТИ СВОЄ МІСЦЕ <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="coffee section" id="menu">
+      <div class="section-heading reveal-up">
+        <p class="eyebrow">ПРИГОТУВАЛИ ДЛЯ ТЕБЕ</p>
+        <h2>Кава — <em>з любов'ю.</em></h2>
+        <p class="section-intro">Від знайомої класики до прохолодних сезонних напоїв. Кожна чашка — уважно й щойно для тебе.</p>
+      </div>
+      <div class="coffee-layout">
+        <div class="coffee-photo reveal-left">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1400&q=85" alt="Бариста готує свіжу каву" loading="lazy">
+          <span>MADE WITH CARE, SERVED WITH JOY</span>
         </div>
-        <div class="story-copy">
-          <p class="eyebrow"><span class="eyebrow-line"></span> НЕ ПРОСТО КАВА</p>
-          <h2>Мистецтво<br>бути <em>тут і зараз.</em></h2>
-          <p class="body-copy">Ми віримо, що найкращі речі не потребують поспіху. Тому обираємо зерно з характером, працюємо з локальними обсмажувальниками та готуємо кожну чашку з увагою до деталей.</p>
-          <a class="underlined-link" href="#visit">Більше про NOIR <span>↗</span></a>
-          <div class="values">
-            <div class="value"><strong>01</strong><span>Добірне<br>зерно</span></div>
-            <div class="value"><strong>02</strong><span>Чесний<br>смак</span></div>
-            <div class="value"><strong>03</strong><span>Тепла<br>атмосфера</span></div>
+        <div class="coffee-menu reveal-up">
+          <div class="menu-group">
+            <h3>Еспресо-класика</h3>
+            <div class="menu-item"><div><strong>Еспресо</strong><small>Насичений смак · 30 мл</small></div><span>₴ 55</span></div>
+            <div class="menu-item"><div><strong>Американо</strong><small>Еспресо · гаряча вода</small></div><span>₴ 65</span></div>
+            <div class="menu-item"><div><strong>Капучино</strong><small>Еспресо · молоко · ніжна пінка</small></div><span>₴ 85</span></div>
+            <div class="menu-item"><div><strong>Лате</strong><small>Подвійне еспресо · молоко</small></div><span>₴ 95</span></div>
           </div>
+          <div class="menu-group">
+            <h3>Особливий настрій</h3>
+            <div class="menu-item"><div><strong>Cold Brew</strong><small>Повільне заварювання · лід</small></div><span>₴ 105</span></div>
+            <div class="menu-item"><div><strong>Orange Tonic</strong><small>Еспресо · тонік · апельсин</small></div><span>₴ 115</span></div>
+            <div class="menu-item"><div><strong>Фільтр дня</strong><small>Добірне зерно · альтернативне заварювання</small></div><span>₴ 90</span></div>
+          </div>
+          <a class="text-link menu-more" href="#visit">ЗАПИТАЙ ПРО СЕЗОННІ НАПОЇ <span>↗</span></a>
         </div>
       </div>
     </section>
 
-    <!-- ЕКРАН 3: меню та візит -->
-    <section class="menu-section screen" id="menu">
-      <div class="section-topline"><span>03 — ОБРАНЕ БАРИСТА</span><span>ПРОСТІ РЕЧІ. ОСОБЛИВИЙ СМАК.</span></div>
-      <div class="menu-heading">
-        <div><p class="eyebrow"><span class="eyebrow-line"></span> THE NOIR MENU</p><h2>Твоя нова<br><em>улюблена чашка.</em></h2></div>
-        <p class="menu-intro">Знайомі смаки з маленьким акцентом на особливе. Обирай настрій — ми подбаємо про решту.</p>
+    <section class="quote-section">
+      <div class="quote-mark">“</div>
+      <blockquote>«Найкращі розмови починаються<br>за чашкою хорошої кави».</blockquote>
+      <p>NOIR COFFEE HOUSE</p>
+    </section>
+
+    <section class="newsletter section" id="visit">
+      <div class="newsletter-copy reveal-up">
+        <p class="eyebrow">ЗАЛИШАЙМОСЯ НА ЗВ'ЯЗКУ</p>
+        <h2>Трохи NOIR<br><em>у твоїй пошті.</em></h2>
+        <p>Розповідатимемо про новинки меню, дегустації та маленькі події у нашій кав'ярні.</p>
       </div>
-      <div class="menu-cards">
-        <article class="menu-card">
-          <div class="product-photo product-one" role="img" aria-label="Чашка капучино"></div>
-          <div class="product-meta"><span>01 / CLASSIC</span><span>₴ 85</span></div>
-          <h3>Velvet Cappuccino</h3><p>Еспресо · молоко · оксамитова пінка</p>
-        </article>
-        <article class="menu-card">
-          <div class="product-photo product-two" role="img" aria-label="Холодна кава з льодом"></div>
-          <div class="product-meta"><span>02 / SIGNATURE</span><span>₴ 110</span></div>
-          <h3>Cold Mood</h3><p>Колд брю · тонік · цитрус</p>
-        </article>
-        <article class="menu-card">
-          <div class="product-photo product-three" role="img" aria-label="Кава та десерт"></div>
-          <div class="product-meta"><span>03 / SWEET</span><span>₴ 125</span></div>
-          <h3>Sunday Moment</h3><p>Фільтр-кава · сезонний десерт</p>
-        </article>
-      </div>
-      <div class="visit-banner" id="visit">
-        <div><p class="eyebrow">ТВОЄ МІСЦЕ ВЖЕ ЧЕКАЄ</p><h2>Зустрінемось<br><em>у NOIR?</em></h2></div>
-        <div class="visit-details"><p>Київ, вул. Кавова, 12<br>Щодня · 08:00—21:00</p><a class="button button-light" href="https://maps.google.com/?q=Kyiv" target="_blank" rel="noopener noreferrer">Прокласти маршрут ↗</a></div>
-      </div>
+      <form class="newsletter-form" id="newsletter-form">
+        <label for="email">ТВОЯ ЕЛЕКТРОННА ПОШТА</label>
+        <div class="email-row"><input id="email" name="email" type="email" placeholder="name@email.com" required><button type="submit" aria-label="Підписатися">Підписатися <span>↗</span></button></div>
+        <p class="form-message" aria-live="polite">Жодного спаму — лише хороші новини та кава.</p>
+      </form>
     </section>
   </main>
 
   <footer class="footer">
-    <a class="logo logo-footer" href="#home">NOIR<span>.</span></a>
-    <p>Зроблено з любов'ю до кави та деталей.</p>
-    <a href="https://www.squarespace.com/templates" target="_blank" rel="noopener noreferrer">Дизайн-референс ↗</a>
-    <span>© 2026 NOIR COFFEE ATELIER</span>
+    <div class="footer-brand"><a class="logo" href="#home">NOIR<span>.</span></a><p>Кава, розмови та час для себе.</p></div>
+    <div class="footer-details"><p>Київ, вул. Кавова, 12</p><p>Щодня · 08:00—21:00</p><a href="https://maps.google.com/?q=Kyiv" target="_blank" rel="noopener noreferrer">Прокласти маршрут ↗</a></div>
+    <span class="copyright">© 2026 NOIR COFFEE HOUSE</span>
   </footer>
-  <script src="script.js"></script>
 </body>
 </html>

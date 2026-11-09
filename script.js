@@ -1,33 +1,49 @@
-// Невелике інтерактивне мобільне меню
+// Мобільна навігація та анімація появи блоків
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.main-nav');
 
-menuToggle.addEventListener('click', () => {
-  const isOpen = nav.classList.toggle('is-open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
-  menuToggle.textContent = isOpen ? '×' : '☰';
-});
-
-nav.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
+if (menuToggle && nav) {
+  const closeMenu = () => {
     nav.classList.remove('is-open');
     menuToggle.setAttribute('aria-expanded', 'false');
-    menuToggle.textContent = '☰';
-  });
-});
+    menuToggle.setAttribute('aria-label', 'Відкрити меню');
+  };
 
-// Анімація появи контенту другого екрана при прокручуванні
-const storyCopy = document.querySelector('.story-copy');
-if ('IntersectionObserver' in window && storyCopy) {
-  storyCopy.style.opacity = '0';
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+    nav.classList.toggle('is-open', !isOpen);
+    menuToggle.setAttribute('aria-expanded', String(!isOpen));
+    menuToggle.setAttribute('aria-label', isOpen ? 'Відкрити меню' : 'Закрити меню');
+  });
+
+  nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeMenu();
+  });
+}
+
+const revealItems = document.querySelectorAll('.reveal-up, .reveal-left');
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver((entries, currentObserver) => {
+    entries.forEach(entry => {
       if (entry.isIntersecting) {
-        storyCopy.classList.add('reveal-on-scroll');
-        storyCopy.style.opacity = '1';
-        observer.unobserve(storyCopy);
+        entry.target.classList.add('is-visible');
+        currentObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
-  observer.observe(storyCopy);
+  }, { threshold: 0.15 });
+  revealItems.forEach(item => observer.observe(item));
+} else {
+  revealItems.forEach(item => item.classList.add('is-visible'));
+}
+
+// Демонстраційна форма: без сервера показує підтвердження локально.
+const newsletterForm = document.querySelector('#newsletter-form');
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', event => {
+    event.preventDefault();
+    const message = newsletterForm.querySelector('.form-message');
+    message.textContent = 'Дякуємо! Твоя адреса готова до підписки.';
+    newsletterForm.reset();
+  });
 }
