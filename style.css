@@ -509,3 +509,28 @@ h1 em, h2 em { color: var(--accent); font-weight: 500; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+
+/* Мобільний режим: елементи з'являються у viewport і зникають після прокрутки */
+@media (max-width: 760px) {
+  .mobile-scroll-effect {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .45s ease, transform .55s ease;
+    will-change: opacity, transform;
+  }
+
+  .mobile-scroll-effect.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @media (max-width: 760px) {
+    .mobile-scroll-effect {
+      transition: none;
+      transform: none;
+    }
+  }
+}
