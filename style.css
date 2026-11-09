@@ -511,26 +511,86 @@ h1 em, h2 em { color: var(--accent); font-weight: 500; }
 }
 
 
-/* Мобільний режим: елементи з'являються у viewport і зникають після прокрутки */
+}
+
+
+/* ПОЯВЛЕНИЕ КОНТЕНТА ПРИ ПРОКРУТКЕ — отдельный стиль для каждого экрана */
+.reveal-item {
+  opacity: 0;
+  animation: none !important;
+  transition:
+    opacity .7s ease,
+    transform .8s cubic-bezier(.2,.7,.2,1),
+    filter .8s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+  filter: blur(3px);
+}
+
+.reveal-item.is-in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0);
+}
+
+/* Экран 1 — мягкое появление снизу */
+.reveal-hero {
+  transform: translate3d(0, 34px, 0);
+}
+
+/* Экран 2 — фото входит слева, текст справа */
+.reveal-story-image {
+  transform: translate3d(-48px, 0, 0);
+}
+.reveal-story-text {
+  transform: translate3d(42px, 24px, 0);
+}
+
+/* Экран 3 — заголовок проявляется снизу, карточки увеличиваются */
+.reveal-menu-heading {
+  transform: translate3d(0, 38px, 0);
+}
+.reveal-menu-card {
+  transform: translate3d(0, 48px, 0) scale(.94);
+}
+
+/* Финальный экран — блок приходит справа с мягким масштабированием */
+.reveal-visit {
+  transform: translate3d(48px, 0, 0) scale(.97);
+}
+.reveal-footer {
+  transform: translate3d(0, 18px, 0);
+}
+
 @media (max-width: 760px) {
-  .mobile-scroll-effect {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity .45s ease, transform .55s ease;
-    will-change: opacity, transform;
+  .reveal-item {
+    transition-duration: .55s, .65s, .65s;
+    filter: blur(2px);
   }
 
-  .mobile-scroll-effect.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+  .reveal-story-image {
+    transform: translate3d(-28px, 0, 0);
+  }
+
+  .reveal-story-text {
+    transform: translate3d(28px, 18px, 0);
+  }
+
+  .reveal-menu-card {
+    transform: translate3d(0, 34px, 0) scale(.96);
+  }
+
+  .reveal-visit {
+    transform: translate3d(0, 30px, 0) scale(.98);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  @media (max-width: 760px) {
-    .mobile-scroll-effect {
-      transition: none;
-      transform: none;
-    }
+  .reveal-item,
+  .reveal-item.is-in-view {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
   }
 }

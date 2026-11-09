@@ -16,53 +16,61 @@ nav.querySelectorAll('a').forEach((link) => {
   });
 });
 
-// Анімація появи контенту другого екрана при прокручуванні
-const storyCopy = document.querySelector('.story-copy');
-if ('IntersectionObserver' in window && storyCopy) {
-  storyCopy.style.opacity = '0';
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        storyCopy.classList.add('reveal-on-scroll');
-        storyCopy.style.opacity = '1';
-        observer.unobserve(storyCopy);
-      }
-    });
-  }, { threshold: 0.2 });
-  observer.observe(storyCopy);
-}
+// Поступове появление элементов при прокрутке.
+// Для каждого экрана задан свой тип анимации и задержка между элементами.
+if ('IntersectionObserver' in window) {
+  const revealGroups = [
+    {
+      selector: '#home .hero-copy, #home .hero-visual',
+      className: 'reveal-hero',
+      step: 150
+    },
+    {
+      selector: '#story .section-topline, #story .story-image-wrap',
+      className: 'reveal-story-image',
+      step: 160
+    },
+    {
+      selector: '#story .story-copy > *',
+      className: 'reveal-story-text',
+      step: 120
+    },
+    {
+      selector: '#menu > .section-topline, #menu .menu-heading > *',
+      className: 'reveal-menu-heading',
+      step: 140
+    },
+    {
+      selector: '#menu .menu-card',
+      className: 'reveal-menu-card',
+      step: 170
+    },
+    {
+      selector: '#menu .visit-banner',
+      className: 'reveal-visit',
+      step: 0
+    },
+    {
+      selector: '.footer > *',
+      className: 'reveal-footer',
+      step: 110
+    }
+  ];
 
-// На телефоні контент з'являється під час прокручування та зникає,
-// коли користувач прокручує його за межі екрана. При поверненні — з'являється знову.
-const mobileScrollItems = document.querySelectorAll(
-  '.hero-copy, .hero-visual, .story-image-wrap, .story-copy, ' +
-  '.menu-heading, .menu-card, .visit-banner, .footer > *'
-);
-
-if ('IntersectionObserver' in window && mobileScrollItems.length) {
-  const mobileScrollObserver = new IntersectionObserver((entries) => {
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      entry.target.classList.toggle('is-visible', entry.isIntersecting);
+      entry.target.classList.toggle('is-in-view', entry.isIntersecting);
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -5% 0px'
+    threshold: 0.14,
+    rootMargin: '0px 0px -7% 0px'
   });
 
-  const enableMobileScrollEffects = () => {
-    const isMobile = window.matchMedia('(max-width: 760px)').matches;
-    mobileScrollItems.forEach((item) => {
-      if (isMobile) {
-        item.classList.add('mobile-scroll-effect');
-        mobileScrollObserver.observe(item);
-      } else {
-        mobileScrollObserver.unobserve(item);
-        item.classList.remove('mobile-scroll-effect', 'is-visible');
-      }
+  revealGroups.forEach((group) => {
+    document.querySelectorAll(group.selector).forEach((element, index) => {
+      element.classList.add('reveal-item', group.className);
+      element.style.setProperty('--reveal-delay', `${index * group.step}ms`);
+      revealObserver.observe(element);
     });
-  };
-
-  enableMobileScrollEffects();
-  window.addEventListener('resize', enableMobileScrollEffects, { passive: true });
+  });
 }
-
